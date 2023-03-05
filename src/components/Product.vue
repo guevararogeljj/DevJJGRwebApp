@@ -6,15 +6,15 @@
           label="Combobox"
           outlined
           clearable
-          v-model="currentTutorial.title  "
+          v-model="currentTutorial.title"
           :rules="[(v) => !!v || 'Categoria es requerida']"
           :items="['Categoria 1']"
         ></v-combobox>
 
       <v-text-field
         v-model="currentTutorial.description"
-        :rules="[(v) => !!v || 'Description is required']"
-        label="Description"
+        :rules="[(v) => !!v || 'Nombre requerido']"
+        label="Nombre del producto"
         required
       ></v-text-field>
       
@@ -34,7 +34,7 @@
   </div>
 
   <div v-else>
-    <p>Please click on a Tutorial...</p>
+    <p>Espera un momento..</p>
   </div>
 </template>
 
@@ -53,8 +53,8 @@ export default {
     getTutorial(id) {
       TutorialDataService.get(id)
         .then((response) => {
-          this.currentTutorial = response.data;
-          console.log(response.data);
+          this.currentTutorial = response.data.data;
+          console.log(response.data.data);
         })
         .catch((e) => {
           console.log(e);
@@ -80,7 +80,12 @@ export default {
     },
 
     updateTutorial() {
-      TutorialDataService.update(this.currentTutorial.id, this.currentTutorial)
+      var model = {
+          productId : this.currentTutorial.productId,
+          productName :this.currentTutorial.description,
+      }
+      TutorialDataService.update(model)
+      
         .then((response) => {
           console.log(response.data);
           this.message = "Actualizado con éxito!";
@@ -91,7 +96,7 @@ export default {
     },
 
     deleteTutorial() {
-      TutorialDataService.delete(this.currentTutorial.id)
+      TutorialDataService.delete(this.currentTutorial.productId)
         .then((response) => {
           console.log(response.data);
           this.$router.push({ name: "productos" });

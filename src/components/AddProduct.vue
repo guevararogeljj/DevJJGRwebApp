@@ -33,15 +33,15 @@
     <div v-else>
       <v-card class="mx-auto">
         <v-card-title>
-          Submitted successfully!
+          Actualizado con éxito!
         </v-card-title>
 
         <v-card-subtitle>
-          Click the button to add new Tutorial.
+          Click para agregar
         </v-card-subtitle>
 
         <v-card-actions>
-          <v-btn color="success" @click="newTutorial">Add</v-btn>
+          <v-btn color="success" @click="newTutorial">Agregar</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -67,8 +67,9 @@ export default {
   methods: {
     saveTutorial() {
       var data = {
-        title: this.tutorial.title,
-        description: this.tutorial.description,
+        productId: this.tutorial.title,
+        productName: this.tutorial.description,
+        categoryId: "023cea7e-6639-4fe7-9da9-54dd4a96f776",
       };
 
       TutorialDataService.create(data)

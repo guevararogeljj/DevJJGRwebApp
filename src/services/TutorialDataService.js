@@ -1,3 +1,4 @@
+
 import http from "../http-common";
 
 class TutorialDataService {
@@ -10,10 +11,12 @@ class TutorialDataService {
   }
 
   create(data) {
+    console.log(data)
     return http.post("/product/SaveProduct", data);
   }
 
   update(data) {
+
     return http.put(`/product/Update`, data);
   }
 
